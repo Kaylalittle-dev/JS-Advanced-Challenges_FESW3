@@ -83,8 +83,35 @@ console.log(sortHighToLow([
 /* Question 5 - Find all the posts by a single user
 Call this API "https://jsonplaceholder.typicode.com/posts" and return all the posts by any given user id */
 
-postsByUser(userId) {
-
+/*function postsByUser(userId) {
+    fetch("https://jsonplaceholder.typicode.com/posts").then(res => console.log(res))
 }
 
+postsByUser(4) //.then method */ 
+
+async function postsByUser(userId) {
+    const promise = await fetch("https://jsonplaceholder.typicode.com/posts")
+    //getting promise from fetch API
+    const result = await promise.json()
+    //getting from backend to something frontend can read / understand, converted to json, await to convert
+    const posts = result.filter(element => element.userId === userId)
+    //in frontend, now we need to filter data for parameter equals parameter 
+    console.log(posts)
+    //post only true from filtered results
+}
 postsByUser(4)
+
+/* Question 6 - First 6 Incomplete Todos
+Call this API "" and return the first 6 incomplete todo's from the result. */
+
+async function firstSixIncomplete(userId) {
+    const promise = await fetch("https://json.placeholder.typicode/todos")
+
+    const result = await promise.json()
+
+    const incompleteTasks = result.filter(elem => !elem.completed).slice(0, 6)
+
+    console.log(incompleteTasks)
+}
+
+firstSixIncomplete(6)
